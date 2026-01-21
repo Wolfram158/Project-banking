@@ -1,0 +1,68 @@
+@startuml
+!function $pk()
+!return "<color:#b8861b><&key></color>"
+!endfunction
+
+!function $fk()
+!return "<color:#aaaaaa><&key></color>"
+!endfunction
+
+map Обозначения {
+    $pk() => Первичный ключ
+    $fk() => Внешний ключ
+}
+
+entity "Клиент" as client {
+  $pk() id : bigint
+  --
+  first_name : varchar
+  last_name : varchar
+  birth_date : date
+  passport : char
+  phone_number : char
+  email : varchar
+}
+
+entity "Продукт" as product {
+  $pk() id : bigint
+  --
+  $fk() client_id : bigint
+  $fk() product_offer_id : bigint
+  open_time : timestamp
+  currency : currency_type
+  is_opened : boolean
+}
+
+entity "Предложения по продуктам" as product_offer {
+  $pk() id : bigint
+  --
+  product_type : product_type
+  basic_currency : currency_type
+  accrual_frequence : accrual_frequence
+  min_start_value : bigint
+  max_start_value : bigint
+}
+
+entity "Операции" as operations {
+  $pk() id : bigint
+  --
+  $fk() product_id : bigint
+  operation_type : operation_type
+  operation_time : timestamp
+  sum_value : bigint
+  result_balance : bigint
+}
+
+entity "История процентных ставок" as interest_rate_history {
+  $pk() id : bigint
+  --
+  $fk() product_offer_id : bigint
+  start_time : timestamp
+  interest_rate : decimal
+}
+
+client ||--o{ product
+product ||--|{ operations
+product_offer ||--|{ interest_rate_history
+product_offer ||--o{ product
+@enduml

@@ -1,0 +1,9 @@
+services:
+  bank:
+    build: .
+    environment:
+      POSTGRES_DB: bank
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - '5432'
