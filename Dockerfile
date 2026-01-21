@@ -4,7 +4,7 @@ COPY 2_ddl/ddl.sql /docker-entrypoint-initdb.d/02.sql
 
 COPY 3_data/data.sql /docker-entrypoint-initdb.d/04.sql
 
-COPY 4_queries/q01_products_list.pls /docker-entrypoint-initdb.d/06.sql
+COPY 4_queries/q01_products_list.sql /docker-entrypoint-initdb.d/06.sql
 COPY 4_queries/q02_account_ops.sql /docker-entrypoint-initdb.d/08.sql
 COPY 4_queries/q03_interest_history.sql /docker-entrypoint-initdb.d/10.sql
 COPY 4_queries/q04_account_interest.sql /docker-entrypoint-initdb.d/12.sql
